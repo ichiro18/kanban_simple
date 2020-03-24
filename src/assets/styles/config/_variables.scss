@@ -1,0 +1,19 @@
+//  1. Colors
+// ------------------------------------------
+$primary-color: #6a80d5 !default;
+$background-primary-color: #eef3f9 !default;
+$background-secondary-color: #eaedfc !default;
+$text-primary-color: #636389 !default;
+$text-invert-color: white !default;
+$text-secondary-color: #a1a3b2 !default;
+
+//  2. Typography
+// ------------------------------------------
+$font-family-sans-serif: unquote(
+  "Roboto, Helvetica Neue, Arial, sans-serif"
+) !default;
+
+
+// For vendor
+$default-color: $text-primary-color;
+$primary-color: $primary-color;

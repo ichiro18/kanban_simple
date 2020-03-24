@@ -1,0 +1,92 @@
+// Config
+@import "config/variables";
+@import "config/fonts";
+@import "config/vendor";
+
+// Common
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  font-family: $font-family-sans-serif;
+  font-size: 16px;
+  color: $text-primary-color;
+  background: #eef3f9;
+}
+
+.link {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+
+.button {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: fit-content;
+  min-height: 32px;
+  margin: 0.25rem 0;
+  padding: 6px 12px;
+  border-radius: 2px;
+  outline: none;
+  font-size: 15px;
+  user-select: none;
+  font-family: $font-family-sans-serif;
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+  }
+
+  &:hover:not(.disabled) {
+    cursor: pointer;
+  }
+
+  // * Behavior types
+
+  // Primary
+  &--primary,
+  &.button-primary {
+    @extend .button;
+    border: 1px solid $primary-color;
+    color: white;
+    background-color: $primary-color;
+
+    &:hover {
+      border-color: darken($primary-color, 15%);
+      background-color: darken($primary-color, 15%);
+    }
+
+    &:active {
+      border-color: darken($primary-color, 25%);
+      background-color: darken($primary-color, 25%);
+    }
+  }
+
+  // Secondary
+  &--danger,
+  &.button-danger {
+    @extend .button;
+    border: 1px solid #dd1717;
+    color: white;
+    background-color: #dd1717;
+
+    &:hover {
+      border-color: darken(#dd1717, 15%);
+      background-color: darken(#dd1717, 15%);
+    }
+
+    &:active {
+      border-color: darken(#dd1717, 25%);
+      background-color: darken(#dd1717, 25%);
+    }
+  }
+}
