@@ -5,7 +5,7 @@
         <span class="header__title" v-if="board.name" @click="openSelector">{{
           board.name
         }}</span>
-        <span class="header__title" v-else @click.self="create">
+        <span class="header__title" v-else @click.self="createBoard">
           <i class="far fa-plus-square board__icon"></i>Create board
         </span>
 
@@ -13,22 +13,26 @@
           <i class="fas" :class="indicatorClasses"></i>
         </div>
       </div>
-      <ul class="selector__list" v-if="selectorOpen" v-click-outside="closeSelector">
+      <ul
+        class="selector__list"
+        v-if="selectorOpen"
+        v-click-outside="closeSelector"
+      >
         <li
           v-for="(item, key) in list"
           :key="key"
           class="board__item"
-          @click="select(item.id)"
+          @click="selectBoard(item.id)"
         >
           {{ item.name }}
         </li>
-        <li class="board__item" v-if="list.length" @click="create">
+        <li class="board__item" v-if="list.length" @click="createBoard">
           <i class="far fa-plus-square board__icon"></i>Create board
         </li>
       </ul>
     </div>
     <div class="board__content">
-      <slot></slot>
+      <the-column :columns="board.columns" @updateColumn="updateColumn" />
     </div>
     <the-board-form
       v-if="createModal.show"
@@ -41,10 +45,12 @@
 <script>
 import { Structure } from "@project_src/common/const/structures";
 import TheBoardForm from "@project_src/components/dialogs/TheBoardForm.vue";
+import TheColumn from "@project_src/components/todo/TheColumn.vue";
 
 export default {
   name: "TheBoard",
   components: {
+    TheColumn,
     TheBoardForm,
   },
   data() {
@@ -81,8 +87,23 @@ export default {
       const board = this.list.find((item) => item.id === this.current);
       if (board) {
         this.board = { ...board };
+        this.board.columns = [
+          {
+            name: "vue.draggable",
+            order: 1,
+          },
+          {
+            name: "draggable",
+            order: 2,
+          },
+          {
+            name: "component",
+            order: 3,
+          },
+        ];
       }
     },
+    // * Selector
     openSelector() {
       if (this.list.length) {
         this.selectorOpen = true;
@@ -94,18 +115,24 @@ export default {
     toggleSelector() {
       this.selectorOpen = !this.selectorOpen;
     },
-    create() {
+    // * Board
+    createBoard() {
       this.createModal.show = true;
       this.createModal.closeCallback = () => {
         this.createModal.show = false;
       };
     },
-    select(id) {
+    selectBoard(id) {
       const board = this.list.find((item) => item.id === id);
       if (board) {
         this.$store.dispatch("kanban/selectBoard", board.id);
         this.closeSelector();
       }
+    },
+    // * Column
+    updateColumn(event) {
+      console.log("updateColumn");
+      console.log(event);
     },
   },
 };
