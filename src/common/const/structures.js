@@ -6,4 +6,20 @@ export class Structure {
       post: "",
     };
   }
+
+  static get BOARD() {
+    return {
+      id: "",
+      name: "",
+      columns: [],
+    };
+  }
+
+  static get COLUMN() {
+    return {
+      id: "",
+      name: "",
+      tasks: [],
+    };
+  }
 }

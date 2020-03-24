@@ -13,7 +13,9 @@
         <the-user @click="signUp" />
       </div>
     </header>
-    <main class="content" v-if="isAuth">Content</main>
+    <main class="content" v-if="isAuth">
+      <the-board />
+    </main>
     <div class="jumbotron" v-else>
       <h3 class="jumbotron__title">Warning</h3>
       <p class="jumbotron__message">
@@ -35,11 +37,13 @@
 <script>
 import { mapGetters } from "vuex";
 import TheUser from "@project_src/components/TheUser.vue";
-import TheSignUp from "@project_src/components/TheSignUp.vue";
+import TheSignUp from "@project_src/components/dialogs/TheSignUp.vue";
+import TheBoard from "@project_src/components/todo/TheBoard.vue";
 
 export default {
   name: "App",
   components: {
+    TheBoard,
     TheSignUp,
     TheUser,
   },
@@ -150,6 +154,16 @@ export default {
       line-height: 1.5;
       text-align: center;
     }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    overflow: auto;
+    box-sizing: border-box;
+    font-family: $font-family-sans-serif;
+    position: relative;
   }
 }
 </style>

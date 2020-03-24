@@ -1,5 +1,5 @@
 <template>
-  <the-modal type="content">
+  <the-modal type="content" :on-close-call-back="onCloseCallBack">
     <span class="title" slot="modal__header">Sign Up</span>
     <form class="form form-sign-up" @submit.prevent="onSubmit">
       <div class="form__field">
@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/styles/config/variables";
+@import "../../assets/styles/config/variables";
 
 .form {
   display: flex;
